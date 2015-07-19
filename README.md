@@ -1,5 +1,7 @@
 # smoothfade
 
+[![npm version](https://badge.fury.io/js/smoothfade.svg)](http://badge.fury.io/js/smoothfade)
+
 Smooth fading of volume (gain) in [WebAudio](http://webaudio.github.io/web-audio-api/) is possible with parameter automation on the [GainNode](http://webaudio.github.io/web-audio-api/#the-gainnode-interface).
 
 However, currently, there is no easy way to stop and change (for eg. reverse) an automation smoothly. Once an [AudioParam](http://webaudio.github.io/web-audio-api/#idl-def-AudioParam) is automated, there is no easy way to know it's value at a given point of time except for calculating it manually using the [automation equations](http://webaudio.github.io/web-audio-api/#widl-AudioParam-exponentialRampToValueAtTime-void-float-value-double-endTime). Hence stopping and reversing the automation is not trivial.
@@ -59,8 +61,8 @@ eg: `var sm = smoothfade(context, gainNode, options);`
 	- arguments :
 	- `targetValue` : __Number__ - The targeted value of the gain (between 0 and 1) where the fadeOut will stop. This defaults to 1.
 	- `startTime` : __Number__ - Timestamp to define when the fading starts, in the same time coordinate system as the AudioContext _currentTime_ attribute. This defaults _currentTime_.
-	
-	
+
+
 # License
 
 Apache-2.0
