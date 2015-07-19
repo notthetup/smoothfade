@@ -1,7 +1,7 @@
 {
   "name": "smoothfade",
-  "version": "1.0.0",
-  "description": "webaudio fade volume smoothly",
+  "version": "1.0.1",
+  "description": "Smooth volume fading for WebAudio",
   "main": "index.js",
   "scripts": {
     "test": "jshint index.js && browserify test.js > bundle.js && http-server",
