@@ -1,11 +1,15 @@
 {
   "name": "smoothfade",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Smooth volume fading for WebAudio",
   "main": "index.js",
   "scripts": {
     "test": "jshint index.js && browserify test.js > bundle.js && http-server",
     "build": "jshint index.js && js-beautify -r index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/notthetup/smoothfade.git"
   },
   "keywords": [
     "webaudio",
@@ -14,7 +18,11 @@
     "gain"
   ],
   "author": "Chinmay Pendharkar",
-  "license": "MIT",
+  "license": "Apache2",
+  "bugs": {
+    "url": "https://github.com/notthetup/smoothfade/issues"
+  },
+  "homepage": "https://github.com/notthetup/smoothfade"
   "devDependencies": {
     "browserify": "^11.0.0"
   }
