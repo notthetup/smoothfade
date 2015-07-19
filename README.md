@@ -53,14 +53,14 @@ eg: `var sm = smoothfade(context, gainNode, options);`
 	- `startTime` : __Number__ - Timestamp to define when the fading starts, in the same time coordinate system as the AudioContext _currentTime_ attribute. This defaults _currentTime_.
 
 
-	- `fadeOut` : Fade out the audio. Slowly decrease the gain of gainNode.
+- `fadeOut` : Fade out the audio. Slowly decrease the gain of gainNode.
 	- eg :
 	```js
 	sm.fadeOut(options);
 	```
 	- arguments :
-	- `targetValue` : __Number__ - The targeted value of the gain (between 0 and 1) where the fadeOut will stop. This defaults to 1.
-	- `startTime` : __Number__ - Timestamp to define when the fading starts, in the same time coordinate system as the AudioContext _currentTime_ attribute. This defaults _currentTime_.
+		- `targetValue` : __Number__ - The targeted value of the gain (between 0 and 1) where the fadeOut will stop. This defaults to 1.
+		- `startTime` : __Number__ - Timestamp to define when the fading starts, in the same time coordinate system as the AudioContext _currentTime_ attribute. This defaults _currentTime_.
 
 
 # License
