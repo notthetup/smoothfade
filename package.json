@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/notthetup/smoothfade/issues"
   },
-  "homepage": "https://github.com/notthetup/smoothfade"
+  "homepage": "https://github.com/notthetup/smoothfade",
   "devDependencies": {
     "browserify": "^11.0.0"
   }
