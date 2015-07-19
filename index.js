@@ -8,8 +8,8 @@ module.exports = function (context, gainNode, _globalOptions) {
     return;
   }
 
-  _globalOptions.startValue = _globalOptions.hasOwnProperty('startValue') ? _globalOptions.startValue : 1;
-  _globalOptions.type = _globalOptions.hasOwnProperty('type') ? _globalOptions.type : 'linear';
+  _globalOptions.startValue = _globalOptions.hasOwnProperty('startValue') ? _globalOptions.startValue : gainNode.gain.value;
+  _globalOptions.type = _globalOptions.hasOwnProperty('type') ? _globalOptions.type : 'exponential';
   _globalOptions.fadeLength = _globalOptions.hasOwnProperty('fadeLength') ? _globalOptions.fadeLength : 10;
 
   var ALMOST_ZERO = 0.00001;
