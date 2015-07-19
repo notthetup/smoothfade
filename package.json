@@ -1,0 +1,21 @@
+{
+  "name": "smoothfade",
+  "version": "1.0.0",
+  "description": "webaudio fade volume smoothly",
+  "main": "index.js",
+  "scripts": {
+    "test": "jshint index.js && browserify test.js > bundle.js && http-server",
+    "build": "jshint index.js && js-beautify -r index.js"
+  },
+  "keywords": [
+    "webaudio",
+    "fade",
+    "volume",
+    "gain"
+  ],
+  "author": "Chinmay Pendharkar",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^11.0.0"
+  }
+}
