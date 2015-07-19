@@ -12,7 +12,7 @@ gain.connect(context.destination);
 var sm = smoothfade(context, gain, {
 	'startValue': 1, //optional, default = 1
 	'fadeLength': 2, //optional, default 10
-	'type': 'linear' // optional, default = 'linear'
+	'type': 'exponential' // optional, default = 'linear'
 });
 
 window.addEventListener('load', function(){
@@ -20,7 +20,9 @@ window.addEventListener('load', function(){
 		sm.fadeIn();
 	});
 	document.getElementById('fadeout').addEventListener('click', function(){
-		sm.fadeOut();
+		sm.fadeOut({
+			'targetValue': 0.3
+		});
 	});
 	osc.start(0);
 });

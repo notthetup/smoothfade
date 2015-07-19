@@ -3,7 +3,11 @@
 
 ## API
 ```
-j
+var sm = smoothfade(context, gain, {
+	'startValue': 1, //optional, default = 1
+	'fadeLength': 2, //optional, default 10
+	'type': 'linear' // optional, default = 'linear'
+});
 
 sm.fadeIn({
 	'endTime': endTime,
