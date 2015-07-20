@@ -16,11 +16,15 @@ This library does the calculation and allows fading in/out smoothly.
 npm install smoothfade
 ```
 
-```
+```js
 // wrap the smoothfade around a gain node
+
 var sm = smoothfade(context, gain);
 
-// use fadeIn/fadeOut functions to fadeIn/fadeOut the audio.
+
+// use fadeIn/fadeOut functions to
+// fadeIn/fadeOut the audio.
+
 sm.fadeIn();
 
 sm.fadeOut();
@@ -48,9 +52,9 @@ eg: `var sm = smoothfade(context, gainNode, options);`
 	```js
 	sm.fadeIn(options);
 	```
-	- arguments :
-	- `targetValue` : __Number__ - The targeted value of the gain (between 0 and 1) where the fadeIn will stop. This defaults to 1.
-	- `startTime` : __Number__ - Timestamp to define when the fading starts, in the same time coordinate system as the AudioContext _currentTime_ attribute. This defaults _currentTime_.
+	- arguments (optional):
+		- `targetValue` : __Number__ - The targeted value of the gain (between 0 and 1) where the fadeIn will stop. This defaults to 1.
+		- `startTime` : __Number__ - Timestamp to define when the fading starts, in the same time coordinate system as the AudioContext _currentTime_ attribute. This defaults _currentTime_.
 
 
 - `fadeOut` : Fade out the audio. Slowly decrease the gain of gainNode.
@@ -58,7 +62,7 @@ eg: `var sm = smoothfade(context, gainNode, options);`
 	```js
 	sm.fadeOut(options);
 	```
-	- arguments :
+	- arguments (optional):
 		- `targetValue` : __Number__ - The targeted value of the gain (between 0 and 1) where the fadeOut will stop. This defaults to 1.
 		- `startTime` : __Number__ - Timestamp to define when the fading starts, in the same time coordinate system as the AudioContext _currentTime_ attribute. This defaults _currentTime_.
 
