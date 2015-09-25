@@ -1,0 +1,25 @@
+{
+  "name": "smoothfade",
+  "main": "index.js",
+  "version": "1.0.2",
+  "homepage": "https://github.com/notthetup/smoothfade",
+  "authors": [
+    "Chinmay Pendharkar <notthetup@gmail.com>"
+  ],
+  "description": "Smooth volume fading for WebAudio",
+  "moduleType": [],
+  "keywords": [
+    "webaudio",
+    "fade",
+    "volume",
+    "gain"
+  ],
+  "license": "Apache2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
