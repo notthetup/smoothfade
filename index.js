@@ -4,8 +4,7 @@ module.exports = function (context, gainNode, _globalOptions) {
   _globalOptions = _globalOptions || {};
 
   if (!gainNode || !context) {
-    console.error("'gainNode' and 'context' arguments can't be null");
-    return;
+    throw new Error("'gainNode' and 'context' arguments can't be null");
   }
 
   _globalOptions.startValue = _globalOptions.hasOwnProperty('startValue') ? _globalOptions.startValue : gainNode.gain.value;
@@ -19,13 +18,14 @@ module.exports = function (context, gainNode, _globalOptions) {
   var _currentStartTime = 0;
   var _currentEndTime = context.currentTime;
   var _currDirection = '';
+  var _debug = !!_globalOptions.debug;
 
   function isFading(time) {
     return _currentEndTime > time;
   }
 
   function cauculateInterpolationAt(time) {
-    console.log("calculating interpolation");
+    if (_debug) console.log("calculating interpolation");
     if (time <= _currentStartTime) {
       return _currentStartValue;
     } else if (time >= _currentEndTime) {
@@ -45,7 +45,7 @@ module.exports = function (context, gainNode, _globalOptions) {
       return startTime + _globalOptions.fadeLength;
     } else if(targetValue === _currentStartValue){
       var timeTillNow = (context.currentTime - _currentStartTime);
-      console.log("end time will be now +", timeTillNow);
+      if (_debug) console.log("end time will be now +", timeTillNow);
       return startTime + timeTillNow;
     }else{
       var startValue = cauculateInterpolationAt(startTime);
@@ -53,12 +53,12 @@ module.exports = function (context, gainNode, _globalOptions) {
       if (_globalOptions.type === 'linear'){
         var gradient = _globalOptions.fadeLength / (ALMOST_ZERO - 1);
         timeTaken = ((targetValue - startValue) * gradient);
-        console.log("Time taken to go linearly from ", startValue, "-", targetValue, " is ", timeTaken);
+        if (_debug) console.log("Time taken to go linearly from ", startValue, "-", targetValue, " is ", timeTaken);
 
       }else if (_globalOptions.type === 'exponential'){
         var diff = Math.log(targetValue) - Math.log(startValue);
         timeTaken = (10/Math.log(ALMOST_ZERO) * diff);
-        console.log("Time taken to go expoentially from ", startValue, "-", targetValue, " is ", timeTaken);
+        if (_debug) console.log("Time taken to go expoentially from ", startValue, "-", targetValue, " is ", timeTaken);
       }
       return startTime + timeTaken;
     }
@@ -91,7 +91,7 @@ module.exports = function (context, gainNode, _globalOptions) {
       }
 
       var startvalue = cauculateInterpolationAt(_options.startTime);
-      console.log("Start value", startvalue);
+      if (_debug) console.log("Start value", startvalue);
       gainNode.gain.cancelScheduledValues(_options.startTime);
       gainNode.gain.setValueAtTime(startvalue, _options.startTime);
 
@@ -123,7 +123,7 @@ module.exports = function (context, gainNode, _globalOptions) {
       }
 
       var startvalue = cauculateInterpolationAt(_options.startTime);
-      console.log("Start value", startvalue);
+      if (_debug) console.log("Start value", startvalue);
       gainNode.gain.cancelScheduledValues(_options.startTime);
       gainNode.gain.setValueAtTime(startvalue, _options.startTime);
 
@@ -133,7 +133,7 @@ module.exports = function (context, gainNode, _globalOptions) {
         gainNode.gain.exponentialRampToValueAtTime(_options.targetValue, _options.endTime);
       }
 
-      console.log(context.currentTime,":: Fading out to ", _options.targetValue, "starting from", _options.startTime ,"to", _options.endTime);
+      if (_debug) console.log(context.currentTime,":: Fading out to ", _options.targetValue, "starting from", _options.startTime ,"to", _options.endTime);
 
       _currentStartValue = startvalue;
       _currentTargetValue = _options.targetValue;
