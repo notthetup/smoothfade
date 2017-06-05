@@ -25,7 +25,9 @@ module.exports = function (context, gainNode, _globalOptions) {
   }
 
   function cauculateInterpolationAt(time) {
-    if (_debug) console.log("calculating interpolation");
+    if (_debug) {
+      console.log("calculating interpolation");
+    }
     if (time <= _currentStartTime) {
       return _currentStartValue;
     } else if (time >= _currentEndTime) {
@@ -33,9 +35,9 @@ module.exports = function (context, gainNode, _globalOptions) {
     } else {
       if (_globalOptions.type === 'linear') {
         return _currentStartValue + (_currentTargetValue - _currentStartValue) * ((time - _currentStartTime) / (_currentEndTime - _currentStartTime));
-      }else if (_globalOptions.type === 'exponential'){
+      } else if (_globalOptions.type === 'exponential') {
         var exponent = ((time - _currentStartTime) / (_currentEndTime - _currentStartTime));
-        return _currentStartValue * Math.pow((_currentTargetValue / _currentStartValue), exponent) ;
+        return _currentStartValue * Math.pow((_currentTargetValue / _currentStartValue), exponent);
       }
     }
   }
@@ -43,22 +45,28 @@ module.exports = function (context, gainNode, _globalOptions) {
   function calculateEndTime(startTime, targetValue) {
     if (!isFading()) {
       return startTime + _globalOptions.fadeLength;
-    } else if(targetValue === _currentStartValue){
+    } else if (targetValue === _currentStartValue) {
       var timeTillNow = (context.currentTime - _currentStartTime);
-      if (_debug) console.log("end time will be now +", timeTillNow);
+      if (_debug) {
+        console.log("end time will be now +", timeTillNow);
+      }
       return startTime + timeTillNow;
-    }else{
+    } else {
       var startValue = cauculateInterpolationAt(startTime);
       var timeTaken = 0;
-      if (_globalOptions.type === 'linear'){
+      if (_globalOptions.type === 'linear') {
         var gradient = _globalOptions.fadeLength / (ALMOST_ZERO - 1);
         timeTaken = ((targetValue - startValue) * gradient);
-        if (_debug) console.log("Time taken to go linearly from ", startValue, "-", targetValue, " is ", timeTaken);
+        if (_debug) {
+          console.log("Time taken to go linearly from ", startValue, "-", targetValue, " is ", timeTaken);
+        }
 
-      }else if (_globalOptions.type === 'exponential'){
+      } else if (_globalOptions.type === 'exponential') {
         var diff = Math.log(targetValue) - Math.log(startValue);
-        timeTaken = (10/Math.log(ALMOST_ZERO) * diff);
-        if (_debug) console.log("Time taken to go expoentially from ", startValue, "-", targetValue, " is ", timeTaken);
+        timeTaken = (10 / Math.log(ALMOST_ZERO) * diff);
+        if (_debug) {
+          console.log("Time taken to go expoentially from ", startValue, "-", targetValue, " is ", timeTaken);
+        }
       }
       return startTime + timeTaken;
     }
@@ -91,13 +99,15 @@ module.exports = function (context, gainNode, _globalOptions) {
       }
 
       var startvalue = cauculateInterpolationAt(_options.startTime);
-      if (_debug) console.log("Start value", startvalue);
+      if (_debug) {
+        console.log("Start value", startvalue);
+      }
       gainNode.gain.cancelScheduledValues(_options.startTime);
       gainNode.gain.setValueAtTime(startvalue, _options.startTime);
 
-      if (_globalOptions.type === 'linear'){
+      if (_globalOptions.type === 'linear') {
         gainNode.gain.linearRampToValueAtTime(_options.targetValue, _options.endTime);
-      }else if(_globalOptions.type === 'exponential'){
+      } else if (_globalOptions.type === 'exponential') {
         gainNode.gain.exponentialRampToValueAtTime(_options.targetValue, _options.endTime);
       }
 
@@ -123,17 +133,21 @@ module.exports = function (context, gainNode, _globalOptions) {
       }
 
       var startvalue = cauculateInterpolationAt(_options.startTime);
-      if (_debug) console.log("Start value", startvalue);
+      if (_debug) {
+        console.log("Start value", startvalue);
+      }
       gainNode.gain.cancelScheduledValues(_options.startTime);
       gainNode.gain.setValueAtTime(startvalue, _options.startTime);
 
-      if (_globalOptions.type === 'linear'){
+      if (_globalOptions.type === 'linear') {
         gainNode.gain.linearRampToValueAtTime(_options.targetValue, _options.endTime);
-      }else if(_globalOptions.type === 'exponential'){
+      } else if (_globalOptions.type === 'exponential') {
         gainNode.gain.exponentialRampToValueAtTime(_options.targetValue, _options.endTime);
       }
 
-      if (_debug) console.log(context.currentTime,":: Fading out to ", _options.targetValue, "starting from", _options.startTime ,"to", _options.endTime);
+      if (_debug) {
+        console.log(context.currentTime, ":: Fading out to ", _options.targetValue, "starting from", _options.startTime, "to", _options.endTime);
+      }
 
       _currentStartValue = startvalue;
       _currentTargetValue = _options.targetValue;
