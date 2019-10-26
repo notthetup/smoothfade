@@ -1,29 +1,37 @@
 var smoothfade = require('./index.js');
-
-window.AudioContext = window.AudioContext || window.webkitAudioContext;
-context = new AudioContext();
-
-var osc = context.createOscillator();
-var gain = context.createGain();
-
-osc.connect(gain);
-gain.connect(context.destination);
-
-var sm = smoothfade(context, gain, {
-	'startValue': 1, //optional, default = 1
-	'fadeLength': 2, //optional, default 10
-	'type': 'exponential' // optional, default = 'linear'
-});
+var sm;
 
 window.addEventListener('load', function(){
-	document.getElementById('fadein').addEventListener('click', function(){
-		sm.fadeIn();
+	var fadeIn = document.getElementById('fadein');
+	var fadeOut = document.getElementById('fadeout');
+	document.getElementById('start').addEventListener('click', function () {
+		window.AudioContext = window.AudioContext || window.webkitAudioContext;
+		var context = new AudioContext();
+
+		var osc = context.createOscillator();
+		var gain = context.createGain();
+
+		osc.connect(gain);
+		gain.connect(context.destination);
+
+		sm = smoothfade(context, gain, {
+			'startValue': 1, //optional, default = 1
+			'fadeLength': 2, //optional, default 10
+			'type': 'exponential' // optional, default = 'linear'
+		});
+
+		fadeIn.disabled = false;
+		fadeOut.disabled = false;
+		osc.start(0);
 	});
-	document.getElementById('fadeout').addEventListener('click', function(){
-		sm.fadeOut({
+
+	fadeIn.addEventListener('click', function(){
+		if(sm) sm.fadeIn();
+	});
+	fadeOut.addEventListener('click', function(){
+		if (sm) sm.fadeOut({
 			'targetValue': 0.3
 		});
 	});
-	osc.start(0);
 });
 
