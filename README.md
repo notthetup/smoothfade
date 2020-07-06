@@ -40,7 +40,7 @@ eg: `var sm = smoothfade(context, gainNode, options);`
 - `context`: __AudioContext__ - The [AudioContext](http://webaudio.github.io/web-audio-api/#the-audiocontext-interface) within which the [GainNode](http://webaudio.github.io/web-audio-api/#idl-def-AudioNode) has been created.
 - `gainNode`: __GainNode__ - The [GainNode](http://webaudio.github.io/web-audio-api/#the-gainnode-interface) which is connected to the audio graph which needs to be faded in/out.
 - `options`: Optional object attribute which contains extra configuration options in the following format
-	-`startValue` : __Number__ - The initial starting value of the gainNode. If not specified, the library attempts to read it from the gainNode itself. This is useful if the gainNode is already being automated before this library is initialized.
+	- `startValue` : __Number__ - The initial starting value of the gainNode. If not specified, the library attempts to read it from the gainNode itself. This is useful if the gainNode is already being automated before this library is initialized.
 	- `type` : __String__ - The type of automation to use. Currently support 'linear' and 'exponential'. 'exponential' fade is considered to be more natural to human ears and hence is the default
 	- `fadeLength` : __Number__ - The time taken (in seconds) for a complete fadeout (from 1 - 0) or fadein (from 0 - 1). This determines how quickly the volume fades for both fadeins and fadeouts. This defaults to 10.
 
